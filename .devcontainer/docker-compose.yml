@@ -4,8 +4,14 @@ services:
             context: .
             dockerfile: Dockerfile
         command: sleep infinity
+        ports:
+            - "8080:80"
+            - "8443:443"
         volumes:
             - ./:/workspace
+            - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ~/.ssl/fullchain.pem:/etc/nginx/site_certs/fullchain.pem
+            - ~/.ssl/privkey.pem:/etc/nginx/site_certs/privkey.pem
         networks:
             - liker_external_network
             - liker_nginx_internal_network
