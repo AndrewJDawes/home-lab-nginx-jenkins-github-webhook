@@ -15,6 +15,8 @@ services:
         networks:
             - liker_external_network
             - liker_nginx_internal_network
+        dns:
+            - 8.8.8.8
 networks:
     liker_external_network:
         external: true
