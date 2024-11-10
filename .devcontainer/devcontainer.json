@@ -1,13 +1,14 @@
 {
-    "name": "liker-nginx",
-	"dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
-	"service": "liker_nginx",
+    "name": "home-lab-nginx",
+	"build": {
+		"dockerfile": "../Dockerfile"
+	},
 	"workspaceFolder": "/workspace",
     // "postCreateCommand": "npm ci",
 	// https://tjtelan.com/blog/how-to-link-multiple-docker-compose-via-network/
 	// https://containers.dev/guide/dockerfile
 	// https://github.com/microsoft/vscode-remote-release/issues/2485
-	"initializeCommand": "docker network create liker || echo 'Already exists'",
+	"initializeCommand": "docker network create home-lab || echo 'Already exists'",
 	"postAttachCommand": "git config --global --add safe.directory /workspace",
     "customizations": {
 		"vscode": {
