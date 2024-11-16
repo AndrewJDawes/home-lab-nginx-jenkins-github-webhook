@@ -1,10 +1,18 @@
 FROM nginx:1.27.1-alpine AS base
 
-EXPOSE 80 443
+ENV NGINX_UPSTREAM_PROTOCOL=http
+ENV NGINX_UPSTREAM_PORT=80
 
-COPY /etc/nginx/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY /etc/nginx/nginx.conf.template /etc/nginx/nginx.conf.template
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+CMD ["/entrypoint.sh", "nginx", "-g", "daemon off;"]
+
+# CMD ["nginx", "-g", "daemon off;"]
 
 FROM base AS dev
 
