@@ -85,8 +85,9 @@ http {
 
         # Catch-all for other routes
         location / {
-            return 404 "Not Found";
-            add_header Content-Type text/plain;
+            # return 404 "Not Found";
+            # add_header Content-Type text/plain;
+            return 404;
         }
     }
 }
