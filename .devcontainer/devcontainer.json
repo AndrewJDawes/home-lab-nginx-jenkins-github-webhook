@@ -3,13 +3,13 @@
 	"build": {
 		"dockerfile": "../Dockerfile"
 	},
-	"workspaceFolder": "/workspace",
+	"workspaceFolder": "/home-lab-nginx-jenkins-public-routes",
     // "postCreateCommand": "npm ci",
 	// https://tjtelan.com/blog/how-to-link-multiple-docker-compose-via-network/
 	// https://containers.dev/guide/dockerfile
 	// https://github.com/microsoft/vscode-remote-release/issues/2485
 	"initializeCommand": "docker network create home-lab || echo 'Already exists'",
-	"postAttachCommand": "git config --global --add safe.directory /workspace",
+	"postAttachCommand": "git config --global --add safe.directory .",
     "customizations": {
 		"vscode": {
 			"settings": {
