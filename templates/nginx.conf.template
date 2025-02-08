@@ -24,6 +24,9 @@ http {
 
     keepalive_timeout  65;
 
+    # allow up to 10GB uploads
+    client_max_body_size 10000M;
+
     #gzip  on;
 
     server_names_hash_bucket_size 64;
@@ -32,7 +35,7 @@ http {
     # If there are any variables in proxy_pass, a resolver will be required
     # 127.0.0.11 is a Docker container's default resolver
     # https://stackoverflow.com/a/22259088/13461208
-    resolver 127.0.0.11;
+    resolver 127.0.0.11 valid=0s;
 
     # Gzip settings
     gzip on;
@@ -64,8 +67,12 @@ http {
         text/javascript
         text/plain
         text/xml;
+    map $http_x_forwarded_proto $x_forwarded_proto {
+        default $scheme; # Default to the scheme used for this request
+        ~.+ $http_x_forwarded_proto; # Use the existing header value if it exists
+    }
     # Dynamic upstream based on requested domain
-     map $http_upgrade $connection_upgrade {
+    map $http_upgrade $connection_upgrade {
         default upgrade;
         ''      close;
     }
